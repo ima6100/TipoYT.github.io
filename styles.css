@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #80deea, #ce93d8, #f8bbd9, #a5d6a7);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.setup-section {
+    margin-bottom: 20px;
+}
+
+.setup-section p {
+    margin: 10px 0;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.chat-section {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    position: relative;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn:hover {
+    color: #666;
+}
+
+.message.sent {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.message.received {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    align-items: flex-end;
+}
+
+.input-area textarea {
+    flex: 1;
+    margin-right: 10px;
+    resize: vertical;
+    min-height: 80px;
+    max-height: 200px;
+}
+
+.input-area button {
+    width: auto;
+    padding: 10px 20px;
+    height: fit-content;
+}
+
+.status {
+    text-align: center;
+    margin-top: 10px;
+    color: #666;
+}

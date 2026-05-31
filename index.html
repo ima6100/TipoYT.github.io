@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чат с Telegram Ботом</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Чат с Telegram Ботом</h1>
+
+        <div class="setup-section">
+            <h2>Настройка</h2>
+            <p>1. Найдите бота в Telegram: <a href="https://t.me/@Fshfdj_bot" target="_blank">@Fshfdj_bot</a></p>
+            <p>2. Отправьте боту любое сообщение</p>
+            <p>3. Введите ваш Chat ID ниже</p>
+            <input type="text" id="chat-id" placeholder="Введите ваш Chat ID" />
+            <button id="start-chat">Начать чат</button>
+        </div>
+
+        <div class="chat-section" id="chat-section" style="display: none;">
+            <button id="back-btn">Назад</button>
+            <div class="messages" id="messages"></div>
+            <div class="input-area">
+                <textarea id="message-input" placeholder="Введите сообщение..." rows="5"></textarea>
+                <button id="send-btn">Отправить</button>
+            </div>
+        </div>
+
+        <div class="status" id="status">Готов к работе</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
