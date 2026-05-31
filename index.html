@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TipweYT — видеохостинг</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">▶</span>
+        <span class="logo-text">TipweYT</span>
+      </a>
+      <div class="search-bar">
+        <form id="searchForm" action="/" method="GET">
+          <input type="text" name="q" id="searchInput" placeholder="Поиск видео..." autocomplete="off">
+          <button type="submit" class="search-btn">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="header-actions">
+        <a href="/upload.html" class="btn-upload">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+          <span>Загрузить</span>
+        </a>
+        <div class="user-menu" id="userMenu"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a href="/" class="sidebar-link active">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <span>Главная</span>
+        </a>
+        <a href="/?sort=views" class="sidebar-link">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
+          <span>В тренде</span>
+        </a>
+        <a href="/?sort=likes" class="sidebar-link">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+          <span>Лучшее</span>
+        </a>
+        <hr>
+        <a href="/?category=Музыка" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg><span>Музыка</span></a>
+        <a href="/?category=Игры" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><span>Игры</span></a>
+        <a href="/?category=Образование" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg><span>Образование</span></a>
+        <a href="/?category=Юмор" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Юмор</span></a>
+        <hr>
+        <a href="/?category=Новости" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M22 3l-1.67 1.67L18.67 3 17 4.67 15.33 3l-1.66 1.67L12 3l-1.67 1.67L8.67 3 7 4.67 5.33 3 3.67 4.67 2 3v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V3zM11 19H4v-6h7v6zm9 0h-7v-2h7v2zm0-4h-7v-2h7v2zm0-4H4V8h16v3z"/></svg><span>Новости</span></a>
+        <a href="/?category=Спорт" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg><span>Спорт</span></a>
+        <a href="/?category=Технологии" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M11 18h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V8h-2v2zm-2 8h2v-2H9v2zm0-4h2v-2H9v2zm0-4h2V8H9v2zm10 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V8h-2v2zM5 18h2v-2H5v2zm0-4h2v-2H5v2zm0-4h2V8H5v2zm10 8h2v-2h-2v2zm0-4h2v-2h-2v2zm0-4h2V8h-2v2zM7 2v2h10V2H7zm14 0h-4v2h4v16H3V4h4V2H3a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg><span>Технологии</span></a>
+        <a href="/?category=Путешествия" class="sidebar-link"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg><span>Путешествия</span></a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div class="categories-bar" id="categoriesBar">
+        <button class="cat-btn active" data-category="all">Всё</button>
+        <button class="cat-btn" data-category="Музыка">Музыка</button>
+        <button class="cat-btn" data-category="Игры">Игры</button>
+        <button class="cat-btn" data-category="Юмор">Юмор</button>
+        <button class="cat-btn" data-category="Образование">Образование</button>
+        <button class="cat-btn" data-category="Новости">Новости</button>
+        <button class="cat-btn" data-category="Спорт">Спорт</button>
+        <button class="cat-btn" data-category="Технологии">Технологии</button>
+        <button class="cat-btn" data-category="Фильмы">Фильмы</button>
+        <button class="cat-btn" data-category="Кулинария">Кулинария</button>
+        <button class="cat-btn" data-category="Животные">Животные</button>
+        <button class="cat-btn" data-category="Путешествия">Путешествия</button>
+      </div>
+
+      <div class="video-grid" id="videoGrid"></div>
+
+      <div class="loading" id="loadingIndicator">
+        <div class="spinner"></div>
+        <p>Загрузка видео...</p>
+      </div>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <svg viewBox="0 0 24 24" width="80" height="80"><path fill="#555" d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM9 8v8l7-4z"/></svg>
+        <h3>Видео не найдены</h3>
+        <p>Попробуйте изменить параметры поиска или <a href="/upload.html">загрузите первое видео</a></p>
+      </div>
+      <div class="error-state" id="errorState" style="display:none">
+        <svg viewBox="0 0 24 24" width="80" height="80"><path fill="#e74c3c" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <h3>Ошибка загрузки</h3>
+        <p>Не удалось загрузить видео. Проверьте подключение к серверу.</p>
+        <button onclick="location.reload()" class="btn-retry">Повторить</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
