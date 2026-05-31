@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Терминал</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="site-disabled-overlay" class="site-disabled-overlay" style="display: none;">
+        <div class="disabled-message">
+            <h1>Сайт временно недоступен</h1>
+            <p>Администратор отключил сайт для обслуживания.</p>
+            <form id="enable-site-form">
+                <input type="password" id="admin-password" placeholder="Пароль администратора" required>
+                <button type="submit">Включить сайт</button>
+            </form>
+        </div>
+    </div>
+    <div class="auth-buttons">
+        <button id="register-btn">Регистрация</button>
+        <button id="login-btn">Вход</button>
+    </div>
+    <div id="menu" class="menu">
+        <div class="menu-title">Добро пожаловать в систему</div>
+        <div id="user-info" style="display: none;"></div>
+        <button id="admin-btn" style="display: none;">Админ панель</button>
+        <button id="terminal-btn">Терминал</button>
+        <button id="chat-btn">Чат</button>
+        <button id="weather-btn">Погода</button>
+        <button id="logout-btn" style="display: none;">Выйти</button>
+    </div>
+    <div id="terminal" class="terminal" style="display: none;">
+        <div class="output" id="output">
+            <div class="line">Добро пожаловать!</div>
+        </div>
+        <div class="input-line">
+            <span class="prompt">$ </span>
+            <input type="text" id="command-input" autofocus>
+        </div>
+    </div>
+    <div id="auth-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2 id="auth-title">Вход</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Имя пользователя" required>
+                <input type="password" id="login-password" placeholder="Пароль" required>
+                <button type="submit">Войти</button>
+            </form>
+            <form id="register-form" style="display: none;">
+                <input type="text" id="register-username" placeholder="Имя пользователя" required>
+                <input type="password" id="register-password" placeholder="Пароль" required>
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+            <button id="switch-to-register">Регистрация</button>
+            <button id="switch-to-login" style="display: none;">Вход</button>
+            <button id="close-auth">Закрыть</button>
+        </div>
+    </div>
+    <div id="admin-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Админ панель</h2>
+            <button id="user-settings-btn">Настройки пользователей</button>
+            <button id="site-settings-btn">Настройки сайта</button>
+            <button id="toggle-user-saving-btn">Включить/выключить сохранение пользователей</button>
+            <button id="change-version-btn">Изменение версии</button>
+            <button id="close-admin">Закрыть</button>
+        </div>
+    </div>
+    <div id="settings-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Настройки сайта</h2>
+            <button id="toggle-site-btn">Отключить сайт</button>
+            <button id="change-password-btn">Изменить пароль для включения</button>
+            <button id="close-settings">Закрыть</button>
+        </div>
+    </div>
+    <div id="change-password-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Изменить пароль</h2>
+            <form id="change-password-form">
+                <input type="password" id="new-password" placeholder="Новый пароль" required>
+                <button type="submit">Сохранить</button>
+            </form>
+            <button id="close-change-password">Закрыть</button>
+        </div>
+    </div>
+    <div id="change-version-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Изменить версию</h2>
+            <form id="change-version-form">
+                <input type="text" id="new-version" placeholder="Новая версия" required>
+                <button type="submit">Сохранить</button>
+            </form>
+            <button id="close-change-version">Закрыть</button>
+        </div>
+    </div>
+    <div id="block-user-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Блокировка пользователя</h2>
+            <form id="block-user-form">
+                <input type="text" id="block-username" placeholder="Имя пользователя" required>
+                <button type="submit">Заблокировать</button>
+            </form>
+            <button id="close-block-user">Закрыть</button>
+        </div>
+    </div>
+    <div id="delete-user-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Удаление пользователя</h2>
+            <form id="delete-user-form">
+                <input type="text" id="delete-username" placeholder="Имя пользователя" required>
+                <button type="submit">Удалить</button>
+            </form>
+            <button id="close-delete-user">Закрыть</button>
+        </div>
+    </div>
+    <div id="unblock-user-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Разблокировка пользователя</h2>
+            <form id="unblock-user-form">
+                <input type="text" id="unblock-username" placeholder="Имя пользователя" required>
+                <button type="submit">Разблокировать</button>
+            </form>
+            <button id="close-unblock-user">Закрыть</button>
+        </div>
+    </div>
+    <div id="users-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form" style="width: 600px;">
+            <h2>Управление пользователями</h2>
+            <div id="users-list" style="max-height: 300px; overflow-y: auto; text-align: left;"></div>
+            <button id="close-users">Закрыть</button>
+        </div>
+    </div>
+    <div id="user-settings-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Настройки пользователей</h2>
+            <button id="manage-users-btn">Управление пользователями</button>
+            <button id="block-user-btn">Блокировка пользователей</button>
+            <button id="unblock-user-btn">Разблокировать пользователя</button>
+            <button id="delete-user-btn">Удаление пользователя</button>
+            <button id="close-user-settings">Закрыть</button>
+        </div>
+    </div>
+    <div id="weather-modal" class="auth-modal" style="display: none;">
+        <div class="auth-form">
+            <h2>Погода</h2>
+            <input type="text" id="weather-city" placeholder="Введите город" required>
+            <button id="get-weather-btn">Получить погоду</button>
+            <div id="weather-result" style="margin-top: 10px;"></div>
+            <button id="close-weather">Закрыть</button>
+        </div>
+    </div>
+    <div id="bottom-message" class="bottom-message"></div>
+    <script src="script.js"></script>
+</body>
+</html>

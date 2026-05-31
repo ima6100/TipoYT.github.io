@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Чат</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="output" id="chat-output">
+            <div class="line">Добро пожаловать в чат! Введите сообщение.</div>
+        </div>
+        <div class="input-line">
+            <span class="prompt">> </span>
+            <input type="text" id="message-input" autofocus>
+        </div>
+    </div>
+    <script>
+        const chatOutput = document.getElementById('chat-output');
+        const messageInput = document.getElementById('message-input');
+        const token = '8187576862:AAFhxkFRyyInS0IE7Sr_2z3Dtdcr2295a_I';
+        let chatId = null;
+        let offset = 0;
+        const currentUser = localStorage.getItem('currentUser') || 'guest';
+
+        function getChatHistory() {
+            const history = JSON.parse(localStorage.getItem(`chatHistory_${currentUser}`)) || [];
+            return history;
+        }
+
+        function saveChatHistory(history) {
+            localStorage.setItem(`chatHistory_${currentUser}`, JSON.stringify(history));
+        }
+
+        function addMessage(text, save = true) {
+            const line = document.createElement('div');
+            line.className = 'line';
+            line.textContent = text;
+            chatOutput.appendChild(line);
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+            if (save) {
+                const history = getChatHistory();
+                history.push({ text, timestamp: new Date().toISOString() });
+                if (history.length > 100) history.shift(); // Ограничить 100 сообщениями
+                saveChatHistory(history);
+            }
+        }
+
+        function loadChatHistory() {
+            const history = getChatHistory();
+            history.forEach(msg => {
+                const line = document.createElement('div');
+                line.className = 'line';
+                line.textContent = msg.text;
+                chatOutput.appendChild(line);
+            });
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+        function pollUpdates() {
+            fetch(`https://api.telegram.org/bot${token}/getUpdates?offset=${offset}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok && data.result.length > 0) {
+                        data.result.forEach(update => {
+                            if (update.message) {
+                                const msg = update.message;
+                                if (!chatId) {
+                                    chatId = msg.chat.id;
+                                    addMessage('Chat ID установлен: ' + chatId);
+                                }
+                                addMessage('Telegram: ' + msg.text);
+                                offset = update.update_id + 1;
+                            }
+                        });
+                    }
+                })
+                .catch(err => console.error('Polling error:', err));
+        }
+
+        loadChatHistory();
+        setInterval(pollUpdates, 1000);
+
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const message = messageInput.value;
+                if (message.trim()) {
+                    if (message === '/stop') {
+                        chatOutput.innerHTML = '';
+                        chatId = null;
+                        offset = 0;
+                        window.close();
+                        return;
+                    }
+                    addMessage('Вы: ' + message);
+                    if (chatId) {
+                        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ chat_id: chatId, text: message })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.ok) {
+                                addMessage('Ошибка отправки: ' + data.description);
+                            }
+                        })
+                        .catch(err => addMessage('Ошибка сети: ' + err.message));
+                    } else {
+                        addMessage('TELEGRAM_BOT не установлен. Отправьте сообщение боту в Telegram.');
+                    }
+                }
+                messageInput.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
