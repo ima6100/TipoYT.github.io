@@ -1,0 +1,43 @@
+цифры сколько раз нажал<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход - TipweYT</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-container">
+      <a href="/" class="auth-logo">
+        <span class="logo-icon">▶</span>
+        <span class="logo-text">TipweYT</span>
+      </a>
+      <h1 class="auth-title">Вход в аккаунт</h1>
+      <p class="auth-subtitle">Войдите, чтобы загружать видео и комментировать</p>
+      
+      <form id="loginForm" class="auth-form">
+        <div class="auth-field">
+          <label>Имя пользователя или Email</label>
+          <input type="text" id="loginInput" placeholder="Введите логин или email" required>
+        </div>
+        <div class="auth-field">
+          <label>Пароль</label>
+          <input type="password" id="passwordInput" placeholder="Введите пароль" required>
+        </div>
+        <div class="auth-error" id="authError" style="display:none"></div>
+        <button type="submit" class="auth-btn" id="authBtn">
+          <span id="authBtnText">Войти</span>
+          <div class="btn-spinner" id="authSpinner" style="display:none">
+            <div class="spinner-small"></div>
+          </div>
+        </button>
+      </form>
+      
+      <p class="auth-link">Нет аккаунта? <a href="/auth/register.html">Зарегистрироваться</a></p>
+      <a href="/" class="auth-back">← На главную</a>
+    </div>
+  </div>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "videos": [],
+  "channels": [],
+  "comments": {},
+  "users": [
+    {
+      "id": "d23cd1ad-ae8d-4c3b-bd7b-06b154088144",
+      "username": "Pioter",
+      "email": "mol4anovpioter@yandex.ru",
+      "password": "e2926f48f670783add577c0762d11434402e19cc6b92722b7c89dda1bea37a74",
+      "avatarUrl": null,
+      "hasChannel": false,
+      "channelId": null,
+      "createdAt": "2026-05-31T11:34:11.761Z"
+    }
+  ]
+}
